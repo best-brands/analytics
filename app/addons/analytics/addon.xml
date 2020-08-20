@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<addon scheme="4.0">
+    <id>analytics</id>
+    <name>Analytics</name>
+    <description>Track campaigns, user origins, and more.</description>
+    <version>1.0</version>
+    <priority>2300</priority>
+    <position>0</position>
+    <status>active</status>
+    <supplier>Best Brands</supplier>
+    <supplier_link>https://github.com/best-brands</supplier_link>
+    <default_language>en</default_language>
+
+    <authors>
+        <author>
+            <name>Harm Smits</name>
+            <email>harm@bestbrands.eu</email>
+            <phone>+31625500655</phone>
+        </author>
+    </authors>
+
+    <autoload>
+        <psr4 prefix="Tygh\Addons\Analytics\">src</psr4>
+    </autoload>
+
+    <bootstrap>\Tygh\Addons\Analytics\Bootstrap</bootstrap>
+
+    <queries>
+        <item for="install">
+            CREATE TABLE IF NOT EXISTS `?:order_connections` (
+              `connection_id` mediumint(8) unsigned NOT NULL auto_increment,
+              `order_id` mediumint(8) unsigned NOT NULL,
+              `utm_source` varchar(255) default '',
+              `utm_campaign` varchar(255) default '',
+              `utm_medium` varchar(64) default '',
+              `browser` varchar(255) default '',
+              PRIMARY KEY (`connection_id`)
+            ) Engine=InnoDB DEFAULT CHARSET UTF8;
+        </item>
+    </queries>
+</addon>
